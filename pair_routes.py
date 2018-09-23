@@ -94,11 +94,11 @@ def get_nearest_or_divide(sid):
 		sys.exit(1)
 	#G.remove_edge(mempt['nid'],pt['nid'])
 	G.add_edge(mempt['nid'],point_id)
-	G.add_edge(point_id,mempt['nid'])
-	if (mempt['nid'],pt['nid']) in G.edges():
+	G.add_edge(point_id,pt['nid'])
+	if (pt['nid'],mempt['nid']) in G.edges():
 		#G.remove_edge(mempt['nid'],pt['nid'])
 		G.add_edge(point_id,mempt['nid'])
-		G.add_edge(mempt['nid'],point_id)
+		G.add_edge(pt['nid'],point_id)
 
 	return point_id 
 
@@ -170,6 +170,7 @@ def find_path(start,end,segment):
 			break
 		for neigh in G.neighbors(n.aid):
 			weight = n.weight + dist_from_segment(neigh,segment)
+			print("N: {}, w: {}".format(neigh,weight))
 			if weight > MAX_WEIGHT:
 				continue
 			if neigh in stat and stat[neigh].weight < weight:

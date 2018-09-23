@@ -89,6 +89,7 @@ def mark_ref_paired(osm,pid):
 			stop["paired"] = "ref"
 		for stop in pid[ref]:
 			stop["paired"] = "ref"
+			stop["osm_id"] = osm[ref][0]["osm_id"]
 	osm_orphans = osmrefs.difference(pidrefs)
 	return osm_orphans
 
