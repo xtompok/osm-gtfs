@@ -165,6 +165,9 @@ for name in pid_by_name.keys():
 			eq+=1	
 			(perm,weight) = pair_stop(osm,pid)
 			pairgeojson += stop_pairing_geojson(osm,pid,perm,weight)
+			for i in range(len(osm)):
+				osm[i]["ref"]=pid[perm[i]]["ref"]
+				pid[perm[i]]["osm_id"] = osm[i]["osm_id"]
 		if  len(osm) > 0 and len(pid) > 0:
 			print("{}[{}]: O:{} x P:{}".format(name,mode,len(osm),len(pid)))
 
@@ -174,5 +177,11 @@ with open("stops_pairing.geojson","w") as outfile:
 		"features":pairgeojson
 	}
 	json.dump(geojson,outfile)
+
+with open("pidstops-out.json","w") as pidfile:
+	json.dump(pidstops,pidfile)
+
+with open("osmstops-out.json","w") as osmfile:
+	json.dump(osmstops,osmfile)
 
 print("More in osm: {}, more in PID: {}, equal: {}".format(more_osm,more_pid,eq))

@@ -33,7 +33,7 @@ def mode_from_tags(stop):
 		else:
 			stop["train"] = True
 
-UTMproj = Proj("+proj=utm +zone=33N +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+UTMproj = Proj(init='epsg:3857')
 
 conn= psycopg2.connect("dbname=cz_osm")
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
